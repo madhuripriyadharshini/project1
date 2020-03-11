@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <script src="./script.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <style>
+
+        form {
+        text-align: center;
+        }
+        html,body
+        {
+            background-color: aqua;
+        }
+        </style>
+    <body>
+
+
+		<!-- signup form -->
+
+    <form>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" ><br>
+    <label for="Email">Email:</label><br>
+    <input type="text" id="Email" name="Email" >
+    <br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" >
+    <br>
+    <label for="pincode">Pincode:</label><br>
+    <input type="text" id="pincode" name="pincode" >
+    <br>
+    <label for="contact">Contact:</label><br>
+    <input type="text" id="contact" name="contact" >
+    <br>
+    <button type="button" id="signup" onclick="signupinfo()">signup</button>
+  </form>	
+  
+  <!--  Add cart form  -->
+  
+<form>
+    <label for="productname">ProductName:</label><br>
+    <input type="text" id="productname" name="productname" ><br>
+    <label for="product_id">Product_Id:</label><br>
+    <input type="text" id="product_id" name="product_id" >
+    <br>
+    <label for="quantity">Quantity:</label><br>
+    <input type="text" id="quantity" name="quantity" >
+    <br>
+    <label for="address">Address:</label><br>
+    <input type="text" id="address" name="address" >
+    <br>
+    <label for="amount">Amount:</label><br>
+    <input type="text" id="amount" name="amount" >
+    <br>
+    <label for="percentage">Percentage:</label><br>
+    <input type="text" id="percentage" name="percentage" >
+    <br>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description" >
+    <br>
+    <button type="button" id="cart" onclick="cart()">Addcart</button>
+  </form>
+
+  <!-- company form -->  
+  <form>
+      
+    <label for="company_name">Name:</label><br>
+    <input type="text" id="company_name" name="company_name" ><br>
+    <label for="gstnum">Gstnum:</label><br>
+    <input type="text" id="gstnum" name="gstnum" ><br>
+    <label for="company_address">Address:</label><br>
+    <input type="text" id="company_address" name="company_address" >
+    <br>
+    <button type="button" id="cmp" onclick="companydata()">Addcompany</button>
+    <br>
+  </form>	
+
+  <!--  BILL Form -->
+
+            
+            <form>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email" ><br>
+                <label for="product_id">Product_Id:</label><br>
+                <input type="text" id="product_id" name="product_id" >
+                <br>
+                <label for="quantity">Quantity:</label><br>
+                <input type="text" id="quantity" name="quantity" >
+                <br>
+                <label for="postcode">Postcode:</label><br>
+                <input type="text" id="postcode" name="postcode" >
+                <br>
+                <label for="houseNo">HouseNo:</label><br>
+                <input type="text" id="houseNo" name="houseNo" >
+                <br>
+                <label for="streetAddress">Percentage:</label><br>
+                <input type="text" id="streetAddress" name="streetAddress" >
+                <br>
+                <label for="mobile">Description:</label><br>
+                <input type="text" id="mobile" name="mobile" >
+                <br>
+                <button type="button" id="bill" onclick="billcart()">Billcart</button>
+              </form>
+    
+
+            </body>
+        </head>
+ </html>
+ 

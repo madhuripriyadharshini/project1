@@ -1,0 +1,394 @@
+<html>
+    <head>
+	 <script src="./web32.min.js"></script>
+    </head>
+    <body>
+        <p id="transfer"></p>
+        <button onclick="put()">Set product details</button></br></br>
+        <button onclick="get()">Get product details</button></br></br>
+        <button onclick="buy()">Buy product</button></br></br>
+        <button onclick="cancelbuy()">Cancel Purchase</button></br></br>
+
+
+        <script type="text/javascript">
+        var web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/7dd9eccaacd24fd5918dd7e073e14576'))
+		var contract_address  = "0xb908eE0D331AFD80fF60733B9dB803A0e379aBD3";
+		var abiarray =
+        [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "cancelPurchase",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "purchase",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "ProductID",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "ProductQuantity",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			}
+		],
+		"name": "PurchaseHistory",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_material",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_color",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256[3]",
+				"name": "_sofa",
+				"type": "uint256[3]"
+			},
+			{
+				"internalType": "uint256[3]",
+				"name": "_bed",
+				"type": "uint256[3]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_weeks",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_sku",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_caring",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_picHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "setProduct",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_productID",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_material",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_color",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256[3]",
+				"name": "_sofa",
+				"type": "uint256[3]"
+			},
+			{
+				"internalType": "uint256[3]",
+				"name": "_bed",
+				"type": "uint256[3]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_weeks",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_sku",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_caring",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_picHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "updateProduct",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "productCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "Products",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "Material",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Color",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "DeliveryWeeks",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "SKU",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "CaringInstructions",
+				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "PictureHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "Price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "status",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "quantity",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]        
+        var contract = new web3.eth.Contract(abiarray,contract_address);
+
+        function put(){
+            var tx={
+                from: "0x289cdb76db796cc6c915c4b33c77dc22aa9a0705",
+                to: contract_address,
+                gas: 2000000,
+                data: contract.methods.setProduct(2, "woodern", "white", [78,58,65],[12,52,32], 3, "some sku", "handle with care", "0x35346346", 50000, 20).encodeABI()
+             }
+             web3.eth.accounts.signTransaction(tx,'0x40897687A246AF2FEAB0D98A3E5BB874509AA1EB5BB401DF04052FC5320B4A29',function(error,result){
+                 console.log(result,error);
+                 if(result){
+                     web3.eth.sendSignedTransaction(result.rawTransaction)
+                     .then(result=>console.log(result))
+                     .catch(error=>console.log(error))
+                 }
+             })
+            }
+        function get(){
+            contract.methods.Products(2).call(function(error,result){
+            console.log(result,error);
+        });
+        }    
+
+        function update() {
+            var tx={
+                from: "0x289cdb76db796cc6c915c4b33c77dc22aa9a0705",
+                to: contract_address,
+                gas: 2000000,
+                data: contract.methods.updateProduct(2, "woodern", "white", [78,58,65],[12,52,32], 3, "some sku", "handle with care", "0x35346346", 50000, 20).encodeABI()
+            }
+            web3.eth.accounts.signTransaction(tx,'0x40897687A246AF2FEAB0D98A3E5BB874509AA1EB5BB401DF04052FC5320B4A29',function(error,result){
+                 console.log(result,error);
+                 if(result){
+                     web3.eth.sendSignedTransaction(result.rawTransaction)
+                     .then(result=>console.log(result))
+                     .catch(error=>console.log(error))
+                 }
+             })
+
+        }
+
+        function buy() {
+            var tx={
+                from: "0x289cdb76db796cc6c915c4b33c77dc22aa9a0705",
+                to : contract_address,
+                gas: 2000000,
+                data: contract.methods.purchase(2,5).encodeABI()
+            }
+            web3.eth.accounts.signTransaction(tx,'0x40897687A246AF2FEAB0D98A3E5BB874509AA1EB5BB401DF04052FC5320B4A29',function(error,result){
+                 console.log(result,error);
+                 if(result){
+                     web3.eth.sendSignedTransaction(result.rawTransaction)
+                     .then(result=>console.log(result))
+                     .catch(error=>console.log(error))
+                 }
+             })
+        }
+
+        function cancelbuy() {
+            var tx={
+                from: "0x289cdb76db796cc6c915c4b33c77dc22aa9a0705",
+                to : contract_address,
+                gas: 2000000,
+                data: contract.methods.cancelPurchase(2,5).encodeABI()
+            }
+            web3.eth.accounts.signTransaction(tx,'0x40897687A246AF2FEAB0D98A3E5BB874509AA1EB5BB401DF04052FC5320B4A29',function(error,result){
+                 console.log(result,error);
+                 if(result){
+                     web3.eth.sendSignedTransaction(result.rawTransaction)
+                     .then(result=>console.log(result))
+                     .catch(error=>console.log(error))
+                 }
+             })
+        }
+		
+	</script>
+
+	
+    </body>
+</html>
